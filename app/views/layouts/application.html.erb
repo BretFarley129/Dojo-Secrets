@@ -14,7 +14,6 @@
   <% flash[:errors].each do |e| %>
     <p><%= e %></p>
   <% end %>
-  <p><%= flash[:errors] %></p>
 <% end %>
 <% if current_user %>
   <form action="/sessions/<%=current_user.id%>" method="post">
