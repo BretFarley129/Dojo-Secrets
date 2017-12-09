@@ -1,0 +1,24 @@
+<h1> LOG IN</h1>
+<form action='/sessions/new' method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <table>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" name="Email">
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <input type="password" name="Password">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" value="Log In" id="Log In" name="Log In">Log Out</button>
+            </td>
+        </tr>
+    </table>
+</form>
