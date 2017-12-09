@@ -5,8 +5,6 @@ class UsersController < ApplicationController
   def create
     puts params['Name']
     puts params['Email']
-    puts params['Password']
-    puts params['Password_Confirmation']
     @user = User.new(name: params['Name'], email: params['Email'], password: params['Password'], password_confirmation: params['Password_Confirmation'])
     if @user.valid?
       @user.save
@@ -22,7 +20,29 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
+
+  def update
+    @user = User.find(params[:id])
+    @user.email = params['Email']
+    @user.name = params['Name']
+    if @user.valid?
+      @user.save
+      redirect_to "/users/#{@user.id}"
+    else
+      flash[:errors] = ['Email is invalid']
+      redirect_to :back
+    end
+  end
+
+  def delete
+    @user = User.find(params[:id])
+    @user.destroy
+    reset_session
+    redirect_to '/users/new'
+  end
+
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   private
