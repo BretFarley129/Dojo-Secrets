@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#show'
 
   get 'users/:id/edit' => 'users#edit'
-  post 'users/:id/edit' => 'users#update'
+  patch 'users/:id/edit' => 'users#update'
 
   delete 'users/:id' => 'users#delete'
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

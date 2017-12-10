@@ -24,4 +24,14 @@ RSpec.describe UsersController, type: :controller do
         expect(response).to redirect_to("/sessions/new")
     end
   end
+  context "when signed in as the wrong user" do
+    before do
+      @user2 = create(:user)
+      log_in
+    end
+    it "cannot access profile page another user"
+    it "cannot access the edit page of another user" 
+    it "cannot update another user"
+    it "cannot destroy another user"
+  end
 end

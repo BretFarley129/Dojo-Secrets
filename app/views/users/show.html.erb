@@ -6,13 +6,13 @@
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <textarea name="Content" rows="5" cols="70"></textarea>
     <input type="submit" value="Create Secret" id="Create Secret" name="Create Secret"/>
-</form>
-
-<% @secrets.each do |secret| %>
-    # Secret Content that everyone can see
-    <% if current_user == secret.user %>
+    </form>
+    
+    <% @secrets.each do |secret| %>
+        <% if current_user == secret.user %>
         <%= secret.content %>
         <form action="/secrets/<%= secret.id %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
             <input type="hidden" name="_method" value="delete">
             <input type="submit" value="Delete Secret" id="Delete Secret" name="Delete Secret"/>
         </form>

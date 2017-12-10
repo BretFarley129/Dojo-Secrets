@@ -1,5 +1,6 @@
 <h1> Edit User no. <%= @user.id %></h1>
 <form action='/users/<%= @user.id %>/edit' method="post">
+<input type="hidden" name="_method" value="patch">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <table>
         <tr>
@@ -24,6 +25,7 @@
 </form>
 <br>
 <form action="/users/<%= @user.id %>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Account" id="Delete Account" name="Delete Account"/>
 </form>

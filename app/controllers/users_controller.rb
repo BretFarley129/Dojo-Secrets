@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :require_login, :only => [:create,:new]
+  before_action :check_user
   def new
   end
   
@@ -48,7 +49,12 @@ class UsersController < ApplicationController
 
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   private
-  def user_params
+  def check_user
+    if params[:id]
+      if params[:id] != session[:user_id]
+        params[:id] = session[:user_id]
+      end
+    end
   end
 
 end
