@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :require_login, :only => [:create,:new]
-  before_action :check_user
+  before_action :check_user, only: [:edit, :show, :update, :delete]
   def new
   end
   

@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+  before_action :check_user
+
   def create
     @user = current_user
     @secret = Secret.find(params[:id])
@@ -24,4 +26,13 @@ class LikesController < ApplicationController
       redirect_to :back
     end
   end
+
+  private
+  def check_user
+    @like = Like.find(params[:id])
+    if current_user != @like.user
+      redirect_to "/users/#{session[:user_id]}"
+    end
+  end
+
 end
