@@ -50,10 +50,8 @@ class UsersController < ApplicationController
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   private
   def check_user
-    if params[:id]
-      if params[:id] != session[:user_id]
-        params[:id] = session[:user_id]
-      end
+    if current_user != User.find(params[:id])
+      redirect_to "/users/#{session[:user_id]}"
     end
   end
 

@@ -26,12 +26,24 @@ RSpec.describe UsersController, type: :controller do
   end
   context "when signed in as the wrong user" do
     before do
-      @user2 = create(:user)
-      log_in
+      @user2 = create(:user, name:"Brian Duong", email: "brian@dojo.com")
+      session[:user_id] = @user.id
     end
-    it "cannot access profile page another user"
-    it "cannot access the edit page of another user" 
-    it "cannot update another user"
-    it "cannot destroy another user"
+    it "cannot access profile page another user" do
+      get :show, id: @user2
+      expect(response).to redirect_to("/users/#{@user.id}")
+    end    
+    it "cannot access the edit page of another user"  do
+      get :edit, id: @user2
+      expect(response).to redirect_to("/users/#{@user.id}")
+    end
+    it "cannot update another user" do
+      patch :update, id: @user2
+      expect(response).to redirect_to("/users/#{@user.id}")
+    end
+    it "cannot destroy another user" do
+      delete :delete, id: @user2
+      expect(response).to redirect_to("/users/#{@user.id}")
+    end
   end
 end
