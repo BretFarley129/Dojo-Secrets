@@ -1,36 +1,29 @@
 <h1> NEW USER</h1>
 <form action='/users/new' method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <table>
-        <tr>
-            <td>Email</td>
-            <td>
-                <input type="text" name="Email">
-            </td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>
-                <input type="text" name="Name">
-            </td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td>
-                <input type="password" name="Password">
-            </td>
-        </tr>
-        <tr>
-            <td>Password Confirmation</td>
-            <td>
-                <input type="password" name="Password_Confirmation">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Join" id="Join" name="Join"/>
-            </td>
-        </tr>
-    </table>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Email" name="Email">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" name="Name">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="Password">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="confirmation">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmation" placeholder="Confirm Password" name="Password_Confirmation">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Join now!</button>
 </form>

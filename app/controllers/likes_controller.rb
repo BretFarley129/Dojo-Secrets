@@ -1,5 +1,4 @@
 class LikesController < ApplicationController
-  before_action :check_user
 
   def create
     @user = current_user
@@ -29,7 +28,7 @@ class LikesController < ApplicationController
 
   private
   def check_user
-    @like = Like.find(params[:id])
+    @like = Like.find_by(params[:id])
     if current_user != @like.user
       redirect_to "/users/#{session[:user_id]}"
     end

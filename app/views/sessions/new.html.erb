@@ -1,24 +1,17 @@
 <h1> LOG IN</h1>
 <form action='/sessions/new' method="post">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <table>
-        <tr>
-            <td>Email</td>
-            <td>
-                <input type="text" name="Email">
-            </td>
-        </tr>
-        <tr>
-            <td>Password</td>
-            <td>
-                <input type="password" name="Password">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Log Ins" id="Log Ins" name="Log Ins"/>
-            </td>
-        </tr>
-    </table>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Email" name="Email">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="Password">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
 </form>

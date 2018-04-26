@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'sessions#new'
+
   get 'secrets/index'
 
   get 'users/new'

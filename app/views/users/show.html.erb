@@ -1,20 +1,73 @@
 <h1><%= @user.name %></h1>
 <a href="/users/<%= @user.id %>/edit">Edit Profile</a>
-
-<h1> NEW SECRET</h1>
-<form action='/secrets/new' method="post">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-    <textarea name="Content" rows="5" cols="70"></textarea>
-    <input type="submit" value="Create Secret" id="Create Secret" name="Create Secret"/>
-    </form>
-    
+<div class="row">
+    <div class="col-sm">
+        <h2> Your Secrets: </h2>
     <% @secrets.each do |secret| %>
         <% if current_user == secret.user %>
-        <%= secret.content %>
-        <form action="/secrets/<%= secret.id %>" method="post">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-            <input type="hidden" name="_method" value="delete">
-            <input type="submit" value="Delete Secret" id="Delete Secret" name="Delete Secret"/>
-        </form>
+        <div class=" well bg-primary text-white d-inline-block" style="width: 80%; vertical-align:top; margin-right: 2%">
+                <%= secret.content%>
+                <p><%= secret.likes.length %> likes</p>
+                <% unless current_user.secrets_liked.include?(secret) %>
+                    <form action="/likes/<%= secret.id %>" method="post" class="d-inline-block">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <button type="submit" class="btn btn-dark">Like</button>
+                    </form>
+                <% else %>
+                    <form action="/likes/<%= secret.id %>" method="post" class="d-inline-block">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-dark">Unlike</button>
+                    </form>
+                <% end %>
+                <% if current_user == secret.user %>
+                    <form action="/secrets/<%= secret.id %>" method="post" class="d-inline-block">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-dark">Delete</button>
+                    </form>
+                <% end %>
+            </div>
+        <% end %>
     <% end %>
-<% end %>
+    </div>
+
+    <div class="col-sm">
+        <h2> Other secrets you've liked: </h2>
+        <% @secrets.each do |secret| %>
+            <% if current_user.secrets_liked.include?(secret) %>
+            <% if current_user != secret.user %>
+            <div class=" well bg-primary text-white d-inline-block" style="width: 80%; vertical-align:top; margin-right: 2%">
+                <%= secret.content%>
+                <p><%= secret.likes.length %> likes</p>
+                <% unless current_user.secrets_liked.include?(secret) %>
+                    <form action="/likes/<%= secret.id %>" method="post" class="d-inline-block">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                        <button type="submit" class="btn btn-dark">Like</button>
+                    </form>
+                <% else %>
+                    <form action="/likes/<%= secret.id %>" method="post" class="d-inline-block">
+                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-dark">Unlike</button>
+                    </form>
+                <% end %>
+            </div>
+        <% end %>
+        <% end %>
+    <% end %>
+    </div>
+    
+</div>
+
+<h1> NEW SECRET</h1>
+<form action='/secrets/new' method="post" style="margin-bottom: 4%">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="Content"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Sharing is caring</button>
+</form>
